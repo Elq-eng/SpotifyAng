@@ -1,8 +1,15 @@
 import { Routes } from '@angular/router';
+import { HomepageComponent } from '@modules/home/page/homepage/homepage.component';
 
 export const routes: Routes = [
-  // {
-  //   path: '', 
-  //   // component: ExampleComponent  
-  // }
+  {
+    path: 'auth',
+    loadChildren:() => import('./modules/auth/auth.module').then( m=> m.AuthModule)
+  },
+
+  {
+    path: '', 
+    component: HomepageComponent,
+    loadChildren:()=> import(`./modules/home/home.module`).then(m => m.HomeModule )
+  }
 ];
