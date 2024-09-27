@@ -17,7 +17,7 @@
 <!-- Diseño del mode (big)-->
 <div *ngIf="mode==='big'" class="card-player player-big">
 
-  <img [src]="track.cover" alt="" class="cover">
+  <img appImgBroken [customImg] = "'https://cdn-icons-png.flaticon.com/512/3113/3113052.png'" [src]="track.cover" alt="" class="cover">
 
 
   <div class="content-player">
