@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { sessionGuard } from '@core/guards/session.guard';
 import { HomepageComponent } from '@modules/home/page/homepage/homepage.component';
 
 export const routes: Routes = [
@@ -10,6 +11,7 @@ export const routes: Routes = [
   {
     path: '', 
     component: HomepageComponent,
-    loadChildren:()=> import(`./modules/home/home.module`).then(m => m.HomeModule )
+    loadChildren:()=> import(`./modules/home/home.module`).then(m => m.HomeModule ),
+    canActivate:[sessionGuard]
   }
 ];

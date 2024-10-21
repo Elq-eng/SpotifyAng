@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CardPlayerComponent } from '../card-player/card-player.component';
+import { TracksModule } from '@modules/tracks/tracks.module';
 
 @Component({
   selector: 'app-section-generic',
@@ -13,7 +14,7 @@ export class SectionGenericComponent implements OnInit{
 
   @Input() title: string =''
   @Input() mode: 'small' | 'big' = 'big'
-  @Input() dataTracks: Array<any> =[]
+  @Input() dataTracks: Array<TracksModule> =[]
 
   constructor(){}
 

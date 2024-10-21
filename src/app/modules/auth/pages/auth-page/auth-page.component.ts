@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@modules/auth/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-auth-page',
@@ -12,9 +14,12 @@ import { AuthService } from '@modules/auth/services/auth.service';
 })
 export class AuthPageComponent implements OnInit{
 
+  errorSession: boolean = false;
   formLogin:FormGroup = new FormGroup({});
 
-  constructor( private _authService: AuthService){
+  constructor( private _authService: AuthService, private cookie: CookieService,
+    private router:Router
+  ){
 
   }
 
@@ -39,6 +44,16 @@ export class AuthPageComponent implements OnInit{
   sendLogin():void {
     const { email, password} = this.formLogin.value
     this._authService.sendCredentials( email, password)
+      .subscribe( resp =>{
+        console.log('session iniciada correcta')
+        const { tokenSession, data } = resp
+        this.cookie.set('token', tokenSession, 4, '/' )
+        this.router.navigate(['/','tracks'])
+
+      }, err =>{
+        this.errorSession = true
+        console.log('super error')
+      })
 
   }
 
